@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Ejemplo de un SwitchPreference -->
+    <SwitchPreference
+        android:key="notificaciones_activadas"
+        android:title="Activar notificaciones"
+        android:summary="Controla si deseas recibir notificaciones de la app"
+        android:defaultValue="true" />
+
+    <!-- Ejemplo de un ListPreference -->
+    <ListPreference
+        android:key="modo_tema"
+        android:title="Modo de tema"
+        android:summary="Selecciona el modo de la aplicación"
+        android:entries="@array/entradas_tema"
+        android:entryValues="@array/valores_tema"
+        android:defaultValue="claro"/>
+
+    <!-- Ejemplo de un EditTextPreference -->
+    <EditTextPreference
+        android:key="nombre_usuario"
+        android:title="Nombre de Usuario"
+        android:summary="Define un nombre personalizado en la app"
+        android:defaultValue="Invitado" />
+
+</PreferenceScreen>

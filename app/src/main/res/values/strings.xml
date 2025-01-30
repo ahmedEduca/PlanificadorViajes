@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Planificacion_Viaje</string>
+    <string name="nombre_de_usuario">Nombre de usuario</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="recordar_sesion">Recordar sesión</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="titulo_bienvenido">¡Bienvenido de Vuelta!</string>
+    <string name="nombre_usuario">Ahmed Darhbane Azizi</string>
+    <string name="nombre_viaje">Nombre del viaje:</string>
+    <string name="ingrese_viaje">Ingrese el nombre del Viaje</string>
+    <string name="fecha_del_viaje">Fecha del viaje:</string>
+    <string name="fecha_inicio">Fecha Inicio</string>
+    <string name="fecha_fin">Fecha Fin</string>
+    <string name="presupuesto">Presupuesto:</string>
+    <string name="alojamiento_reservado">Alojamiento reservado</string>
+    <string name="transporte_incluido">Transporte incluido</string>
+    <string name="tipo_de_viaje">Tipo de viaje:</string>
+    <string name="turismo">Turismo</string>
+    <string name="negocios">Negocios</string>
+    <string name="aventura">Aventura</string>
+    <string name="buscar">Buscar</string>
+    <string name="guardar_viaje">Guardar Viaje</string>
+    <string name="fin">"Fin: "</string>
+    <string name="inicio">"Inicio: "</string>
+    <string name="titulo_mis_viajes">Mis Viajes</string>
+    <string name="viajes_planificados">0 viajes planificados</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="guardar_cambios">Guardar Cambios</string>
+    <string name="tu_email">Tu email</string>
+    <string name="email">Email</string>
+    <string name="tu_nombre">Tu nombre</string>
+    <string name="nombre">Nombre</string>
+    <string name="escribe_tu_contrasena">Escribe tu contraseña</string>
+    <string name="contrasenad">Contraseña</string>
+</resources>
