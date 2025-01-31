@@ -1,6 +1,7 @@
 package com.darhbane.planificacion_viaje.database;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -16,14 +17,14 @@ public interface UsuarioDao {
     @Insert
     void insertarUsuario(Usuario usuario);
 
+    @Delete
+    void eliminarUsuario(Usuario usuario);
+
     @Query("SELECT * FROM Usuario WHERE id = :usuarioId LIMIT 1")
     Usuario getUsuarioLogueado(int usuarioId);
 
     @Update
     void updateUsuario(Usuario usuario);
-
-    @Query("SELECT * FROM Usuario")
-    List<Usuario> obtenerLosUsuarios();
 
     @Query("SELECT * FROM Usuario WHERE username = :username AND password = :password LIMIT 1")
     Usuario login(String username, String password);
@@ -32,7 +33,6 @@ public interface UsuarioDao {
     Usuario obtenerUsuarioPorId(int userId);
 
 
-    @Query("UPDATE usuario SET fotoPerfil = :fotoUri WHERE id = :userId")
-    void actualizarFotoPerfil(int userId, String fotoUri);
+
 
 }

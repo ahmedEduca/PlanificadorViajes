@@ -2,6 +2,7 @@ package com.darhbane.planificacion_viaje.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -30,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
 
+    private MediaPlayer mediaPlayer;
+
     private static final String PREF_NAME = "login_preferences";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_IS_LOGGED_IN = "IsLoggedIn";
@@ -46,8 +49,15 @@ public class LoginActivity extends AppCompatActivity {
         verificarSesionActiva();
 
         initListeners();
+        initMusic();
 
 
+    }
+
+    private void initMusic() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.login_audio);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
     }
 
     private void initDatabase() {

@@ -47,4 +47,7 @@
     <string name="nombre">Nombre</string>
     <string name="escribe_tu_contrasena">Escribe tu contraseña</string>
     <string name="contrasenad">Contraseña</string>
+    <string name="eliminar_usuario">Eliminar Usuario</string>
+    <string name="agregar_usuario">Agregar Usuario</string>
+    <string name="mi_perfil">Mi Perfil</string>
 </resources>

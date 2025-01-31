@@ -31,21 +31,20 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MiPerfilActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    // Constantes para permisos y selección de imágenes
     private static final int REQUEST_IMAGE_PICK = 100;
     private static final int REQUEST_LOCATION_PERMISSION = 101;
 
-    // Componentes de la UI
     private ImageView ivFotoPerfil;
-    private EditText etNombreUsuario, etContrasena;
+    private EditText etNombreUsuario;
+    private EditText etContrasena;
     private Button btnGuardarPerfil;
+    private Button btnAgregarUsuario;
+    private Button btnEliminarUsuario;
 
-    // Datos del usuario
     private UsuarioDao usuarioDao;
     private Usuario usuarioLogueado;
     private Uri fotoSeleccionada;
 
-    // Google Maps y ubicación
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -54,20 +53,13 @@ public class MiPerfilActivity extends AppCompatActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mi_perfil);
 
-        // Inicializar componentes de UI
         initViews();
 
-        // Inicializar base de datos y cargar datos del usuario
         usuarioDao = AppDatabase.getDatabase(this).usuarioDao();
         cargarUsuarioLogueado();
 
-        // Configurar eventos de botones
         initListeners();
-
-        // Configurar mapa
         configurarMapa();
-
-        // Inicializar cliente de ubicación
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
@@ -76,11 +68,10 @@ public class MiPerfilActivity extends AppCompatActivity implements OnMapReadyCal
         etNombreUsuario = findViewById(R.id.etNombreUsuario);
         etContrasena = findViewById(R.id.etContrasena);
         btnGuardarPerfil = findViewById(R.id.btnGuardarPerfil);
+        btnAgregarUsuario = findViewById(R.id.btnAgregarUsuario);
+        btnEliminarUsuario = findViewById(R.id.btnEliminarUsuario);
     }
 
-    /**
-     * Carga la información del usuario en la UI.
-     */
     private void cargarUsuarioLogueado() {
         usuarioLogueado = usuarioDao.obtenerUsuarioPorId(1);
 
@@ -97,11 +88,10 @@ public class MiPerfilActivity extends AppCompatActivity implements OnMapReadyCal
     private void initListeners() {
         ivFotoPerfil.setOnClickListener(view -> seleccionarFoto());
         btnGuardarPerfil.setOnClickListener(view -> guardarPerfil());
+        btnAgregarUsuario.setOnClickListener(view -> agregarUsuario());
+        btnEliminarUsuario.setOnClickListener(view -> eliminarUsuario());
     }
 
-    /**
-     * Abre la galería del dispositivo para seleccionar una foto de perfil.
-     */
     private void seleccionarFoto() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, REQUEST_IMAGE_PICK);
@@ -120,9 +110,6 @@ public class MiPerfilActivity extends AppCompatActivity implements OnMapReadyCal
         }
     }
 
-    /**
-     * Guarda los cambios del perfil del usuario en la base de datos.
-     */
     private void guardarPerfil() {
         if (usuarioLogueado == null) {
             Toast.makeText(this, "Error: Usuario no encontrado", Toast.LENGTH_SHORT).show();
@@ -140,9 +127,31 @@ public class MiPerfilActivity extends AppCompatActivity implements OnMapReadyCal
         Toast.makeText(this, "Perfil actualizado", Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * Configura el mapa en la UI.
-     */
+    private void agregarUsuario() {
+        String nombreUsuario = etNombreUsuario.getText().toString().trim();
+        String contrasena = etContrasena.getText().toString().trim();
+
+        if (nombreUsuario.isEmpty() || contrasena.isEmpty()) {
+            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Usuario nuevoUsuario = new Usuario(nombreUsuario, contrasena);
+        usuarioDao.insertarUsuario(nuevoUsuario);
+        Toast.makeText(this, "Usuario agregado", Toast.LENGTH_SHORT).show();
+    }
+
+    private void eliminarUsuario() {
+        if (usuarioLogueado == null) {
+            Toast.makeText(this, "Error: Usuario no encontrado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        usuarioDao.eliminarUsuario(usuarioLogueado);
+        Toast.makeText(this, "Usuario eliminado", Toast.LENGTH_SHORT).show();
+        finish(); // Cierra la actividad después de eliminar el usuario
+    }
+
     private void configurarMapa() {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapFragment);
@@ -159,9 +168,6 @@ public class MiPerfilActivity extends AppCompatActivity implements OnMapReadyCal
         verificarPermisosUbicacion();
     }
 
-    /**
-     * Verifica si se tienen permisos de ubicación, y en caso contrario los solicita.
-     */
     private void verificarPermisosUbicacion() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -173,9 +179,6 @@ public class MiPerfilActivity extends AppCompatActivity implements OnMapReadyCal
         }
     }
 
-    /**
-     * Muestra la ubicación actual del usuario en el mapa.
-     */
     private void mostrarUbicacionActual() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
